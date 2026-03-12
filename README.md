@@ -17,6 +17,13 @@ AggreGATOR is a CLI-based RSS feed aggregator built in Go and PostgreSQL. It all
 - **Browse Posts**: View the latest posts from all followed feeds
 - **Database-backed**: Persistent storage with PostgreSQL
 
+## Requirements
+
+Before you can use aggreGATOR, you need:
+
+- **Go 1.20 or higher** - Required for development and installation
+- **PostgreSQL 12 or higher** - Required for running the application
+
 ## Quick Start
 
 ### Prerequisites
@@ -83,6 +90,18 @@ cd sql/schema/
 goose postgres postgres://postgres:postgres@localhost:5432/gator up
 ```
 
+### Install gator CLI
+
+Once the database is set up and migrations are complete, install the gator CLI globally using `go install`:
+
+```bash
+go install ./cmd/gator@latest
+```
+
+This compiles the program into a standalone binary and places it in your `$GOPATH/bin` directory (typically `~/go/bin`). You can now run `gator` commands from anywhere without needing the Go toolchain or source code.
+
+**Note**: `go run . command` is for development testing only. For production use, always use the compiled `gator` binary from `go install`.
+
 ### Configuration
 
 Create `~/.gatorconfig.json`:
@@ -92,6 +111,8 @@ Create `~/.gatorconfig.json`:
   "db_url": "postgres://postgres:postgres@localhost:5432/gator?sslmode=disable"
 }
 ```
+
+This config file stores your database connection string. The CLI will automatically read it when you run commands.
 
 ## Usage
 
